@@ -1,0 +1,71 @@
+﻿@model San_Agustin_Final.Models.Cliente
+
+@{
+    ViewData["Title"] = "Crear Cliente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="stylesheet" href="~/css/admi.css" />
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-lg border-0 rounded-lg mt-5">
+            <div class="card-header bg-primary text-white text-center"
+                 style="background: linear-gradient(to right, #4a90e2, #50c878);">
+                <h1 class="my-2">Crear Cliente</h1>
+            </div>
+            <div class="card-body p-4">
+                <form asp-action="Create" id="clienteForm">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Clave" class="form-label text-primary">
+                            <i class="fas fa-lock me-2"></i>Cédula
+                        </label>
+                        <input asp-for="Clave" class="form-control" id="Clave" maxlength="10" />
+                        <span asp-validation-for="Clave" class="text-danger"></span>
+                        <span id="Clave-error" class="text-danger" style="display:none;"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Nombres" class="form-label text-primary">
+                            <i class="fas fa-user me-2"></i>Nombres
+                        </label>
+                        <input asp-for="Nombres" class="form-control" />
+                        <span asp-validation-for="Nombres" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Apellidos" class="form-label text-primary">
+                            <i class="fas fa-user me-2"></i>Apellidos
+                        </label>
+                        <input asp-for="Apellidos" class="form-control" />
+                        <span asp-validation-for="Apellidos" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Correo" class="form-label text-primary">
+                            <i class="fas fa-envelope me-2"></i>Correo
+                        </label>
+                        <input asp-for="Correo" class="form-control" />
+                        <span asp-validation-for="Correo" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group text-center mt-4">
+                        <input type="submit" value="Crear" class="btn btn-modern btn-crear me-2" />
+                        <a asp-action="Index" class="btn btn-modern btn-detalles">
+                            <i class="fas fa-arrow-left me-2"></i>Volver a la lista
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/validador.js"></script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

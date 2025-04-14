@@ -1,0 +1,27 @@
+﻿@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Confirmación de registro";
+}
+
+<h1 class="service-title">@ViewData["Title"]</h1>
+@{
+    if (@Model.DisplayConfirmAccountLink)
+    {
+        <p class="service-description">
+            Actualmente esta aplicación no tiene un servicio de correo real registrado.
+            Consulta <a href="https://aka.ms/aspaccountconf">esta documentación</a> para
+            configurar un servicio de correo real.
+            Normalmente esto se enviaría por email:
+            <a class="service-description" id="confirm-link" href="@Model.EmailConfirmationUrl">
+                Haz clic aquí para confirmar tu cuenta
+            </a>
+        </p>
+    }
+    else
+    {
+        <p class="service-description">
+            Por favor revisa tu correo electrónico para confirmar tu cuenta.
+        </p>
+    }
+}

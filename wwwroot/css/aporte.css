@@ -1,0 +1,123 @@
+@font-face {
+    font-family: 'Plom';
+    src: url('../Fonts/PlomPraeng.ttf') format('truetype');
+}
+
+.contact-subtitlee {
+    font-family: 'Plom', sans-serif;
+    font-size: 2.35rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    position: relative;
+    padding-left: 15px;
+    border-left: 4px solid #3498db;
+    transition: color 0.3s ease;
+}
+
+    .contact-subtitlee:hover {
+        color: #3498db;
+    }
+
+.text-largee {
+    font-family: 'Plom', sans-serif;
+    font-size: 1.85rem;
+    line-height: 1.8;
+    color: #34495e;
+    text-align: justify;
+    margin-bottom: 25px;
+    padding: 20px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e6e9f0 100%);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+    .text-largee::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, rgba(52, 152, 219, 0.03), rgba(41, 128, 185, 0.02) );
+        z-index: 1;
+        opacity: 0.7;
+        pointer-events: none;
+    }
+
+    .text-largee:hover {
+        background: linear-gradient(135deg, #f0f3f7 0%, #d4dae3 100%);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .text-largee:hover {
+        background-color: rgba(52, 152, 219, 0.05);
+    }
+
+.share-btn {
+    font-family: 'Plom', sans-serif;
+    background-color: #25D366;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    display: inline-block;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+    .share-btn:hover {
+        background-color: #128C7E;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .share-btn i {
+        margin-left: 10px;
+        font-size: 1.3rem;
+        vertical-align: middle;
+    }
+
+.text-center {
+    text-align: center; /* Centrar texto */
+}
+
+.share-btn {
+    background-color: #25D366; /* Color de fondo de WhatsApp */
+    color: white; /* Color del texto */
+    padding: 10px 20px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    text-decoration: none; /* Sin subrayado */
+    transition: background-color 0.3s; /* Transición suave */
+}
+
+    .share-btn:hover {
+        background-color: #128C7E; /* Color de fondo al pasar el mouse */
+    }
+
+.mb-4 {
+    margin-bottom: 1.5rem; /* Espaciado inferior */
+}
+
+.map-container {
+    margin-top: 20px; /* Espaciado superior */
+    border: 1px solid #ddd; /* Borde alrededor del mapa */
+    border-radius: 5px; /* Bordes redondeados */
+    overflow: hidden; /* Ocultar desbordamiento */
+}
+
+iframe {
+    width: 100%; /* Ancho completo */
+    height: 300px; /* Altura del iframe */
+    border: 0; /* Sin borde */
+}
+.text-large {
+    font-size: 2rem; /* Ajusta el tamaño según sea necesario */
+    line-height: 2; /* Mejora la legibilidad */
+}
+

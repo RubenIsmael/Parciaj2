@@ -1,0 +1,95 @@
+﻿@model IEnumerable<San_Agustin_Final.Models.Mensajes>
+
+@{
+    ViewData["Title"] = "Mensajes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Link a Font Awesome para íconos -->
+<link rel="stylesheet" href="~/css/admi.css" />
+
+<!-- Contenedor fluido con diseño moderno -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <!-- Título con margen -->
+            <h1 class="mb-4">Administración de Mensajes</h1>
+
+            <!-- Contenedor de búsqueda con nuevo diseño -->
+            <div class="contenedor-busqueda mb-3">
+                <!-- Barra de búsqueda con icono -->
+                <div class="input-group">
+                    <span class="input-group-text bg-primary text-white">
+                        <i class="fas fa-search"></i>
+                    </span>
+                    <input type="text" id="searchInput" class="input-busqueda form-control" placeholder="Buscar mensajes...">
+                </div>
+            </div>
+
+            <div>
+                <!-- Botón de creación con estilo moderno 
+                <a asp-action="Create" class="btn btn-success my-1">✍️ Nuevo Mensaje</a>
+                </div>-->
+               <div>
+            <p>
+
+            </p>
+        </div>
+            <!-- Contenedor de tabla con sombra y fondo blanco -->
+            <link rel="stylesheet" href="~/css/tabla.css" />
+            <div class="table-container">
+                <!-- Tabla con clases modernas -->
+                <table class="table table-modern" id="mensajesTable">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.NombreCompleto)</th>
+                            <th>@Html.DisplayNameFor(model => model.CorreoElectronico)</th>
+                            <th>@Html.DisplayNameFor(model => model.Telefono)</th>
+                            <th>@Html.DisplayNameFor(model => model.Mensaje)</th>
+                            <th>@Html.DisplayNameFor(model => model.FechaCreacion)</th>
+                            <th>@Html.DisplayNameFor(model => model.Leido)</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.NombreCompleto)</td>
+                                <td>@Html.DisplayFor(modelItem => item.CorreoElectronico)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Telefono)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Mensaje)</td>
+                                <td>@Html.DisplayFor(modelItem => item.FechaCreacion)</td>
+                                <td>
+                                    <input type="checkbox" @(item.Leido ? "checked" : "") enable />
+                                </td>
+                                <td>
+                                        <!-- Botones de acción con iconos -->
+                                        <div class="d-flex gap-2">
+                                       
+                                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger my-1">
+                                                <i class="fas fa-trash me-1"></i>Eliminar
+                                            </a>
+                                        </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Script para búsqueda en tabla -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#searchInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#mensajesTable tbody tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>

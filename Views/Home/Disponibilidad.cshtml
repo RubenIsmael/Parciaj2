@@ -1,0 +1,931 @@
+﻿@model IEnumerable<San_Agustin_Final.Models.Bobeda>
+@{
+    ViewData["Title"] = "Disponibilidad de Bóvedas";
+}
+<div class="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+            <h1 class="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 mb-4">
+                Disponibilidad de Bóvedas
+            </h1>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                Explora nuestras bóvedas y encuentra el espacio perfecto para tus necesidades.
+            </p>
+        </div>
+        <div class="mb-8">
+            <div class="flex flex-wrap justify-center gap-4">
+                <button class="filter-btn active" data-filter="all">
+                    <span class="filter-icon">🌐</span> Todos
+                </button>
+                <button class="filter-btn" data-filter="libre">
+                    <span class="filter-icon">✅</span> Disponibles
+                </button>
+                <button class="filter-btn" data-filter="arriendo">
+                    <span class="filter-icon">🔒</span> Ocupadas
+                </button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="bobedas-grid">
+            @foreach (var bobeda in Model)
+            {
+                <div class="bobeda-card @(bobeda.Estado == "libre" ? "available" : "unavailable")"
+                     data-estado="@bobeda.Estado">
+                    <div class="bg-white shadow-lg rounded-2xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                        <div class="p-6 relative">
+                            <div class="absolute top-4 right-4">
+                                <span class="@(bobeda.Estado == "libre" ? "bg-green-500" : "bg-red-500") text-white px-3 py-1 rounded-full text-sm">
+                                    @(bobeda.Estado == "libre" ? "Disponible" : "Ocupada")
+                                </span>
+                            </div>
+                            <div class="text-center mb-6">
+                                <div class="bg-gradient-to-r from-blue-500 to-purple-600 w-24 h-24 mx-auto rounded-full flex items-center justify-center text-white text-4xl font-bold mb-4 shadow-lg">
+                                    @bobeda.Id
+                                </div>
+                                <h3 class="text-2xl font-bold text-gray-800 mb-2">Bóveda @bobeda.Id</h3>
+                            </div>
+                            <div class="space-y-3 text-center">
+                                <p class="text-gray-600">
+                                    <strong class="text-gray-800">División:</strong> @bobeda.Division
+                                </p>
+                                <p class="text-gray-600">
+                                    <strong class="text-gray-800">Estado:</strong> @bobeda.Estado
+                                </p>
+                            </div>
+                            @if (bobeda.Estado == "libre")
+                            {
+                                <div class="mt-6">
+                                    <button class="modern-green-btn reservar-btn" data-id="@bobeda.Id" data-sector="@bobeda.Division">
+                                        Reservar Bóveda
+                                    </button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Reserva -->
+<div id="reservaModal" class="modal-overlay">
+    <div class="modal-container">
+        <div class="modal-header">
+            <h2 class="modal-title">Reservar Bóveda <span id="bobedaId"></span></h2>
+            <button class="modal-close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="reservaForm">
+                <input type="hidden" id="IdBobedaModal" name="IdBobeda" />
+
+                <div class="form-group">
+                    <label for="CedulaSelect">
+                        <i class="fas fa-id-card"></i> Cédula del Cliente
+                    </label>
+                    <select id="CedulaSelect" name="Cedula" class="form-control">
+                        <option value="">-- Seleccione un cliente --</option>
+                        @foreach (var cliente in ViewBag.Clientes)
+                        {
+                            <option value="@cliente.Id" data-nombre="@cliente.Nombres" data-apellido="@cliente.Apellidos">@cliente.Clave</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="Nombre">
+                        <i class="fas fa-user"></i> Nombre
+                    </label>
+                    <input type="text" id="Nombre" name="Nombre" class="form-control" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label for="Apellido">
+                        <i class="fas fa-user"></i> Apellido
+                    </label>
+                    <input type="text" id="Apellido" name="Apellido" class="form-control" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <i class="fas fa-tag"></i> Precio
+                    </label>
+                    <input type="text" id="PrecioValor" class="form-control" readonly />
+                    <input type="hidden" id="IdPrecio" name="IdPrecio" />
+                </div>
+
+                <div class="form-group">
+                    <label for="BobedaDescripcion">
+                        <i class="fas fa-info-circle"></i> Descripción
+                    </label>
+                    <input type="text" id="BobedaDescripcion" class="form-control" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label for="EstadoPago">
+                        <i class="fas fa-check-circle"></i> Estado de Pago
+                    </label>
+                    <select id="EstadoPago" name="EstadoPago" class="form-control">
+                        <option value="pendiente">Pendiente</option>
+                        <option value="pagado">Pagado</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="FechaReserva">
+                        <i class="fas fa-calendar-alt"></i> Fecha de Reserva
+                    </label>
+                    <input type="date" id="FechaReserva" name="FechaReserva" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-modern btn-crear">
+                        <i class="fas fa-save"></i> Confirmar Reserva
+                    </button>
+                    <button type="button" id="btnNuevoCliente" class="btn-modern btn-secondary">
+                        <i class="fas fa-user-plus"></i> Nuevo Cliente
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--  Nuevo Cliente -->
+<div id="clienteModal" class="modal-overlay">
+    <div class="modal-container">
+        <div class="modal-header">
+            <h2 class="modal-title">Registrar Nuevo Cliente</h2>
+            <button class="modal-close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="clienteForm">
+
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    <label for="Clave">
+                        <i class="fas fa-id-card"></i> Cédula
+                    </label>
+                    <input type="text" id="Clave" name="Clave" class="form-control" maxlength="10" required placeholder="Ingrese la cédula ecuatoriana" />
+                    <span id="Clave-error" class="text-danger" style="display:none;"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="Nombres">
+                        <i class="fas fa-user"></i> Nombres
+                    </label>
+                    <input type="text" id="Nombres" name="Nombres" class="form-control" required placeholder="Ingrese los nombres" />
+                    <span id="Nombres-error" class="text-danger" style="display:none;"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="Apellidos">
+                        <i class="fas fa-user"></i> Apellidos
+                    </label>
+                    <input type="text" id="Apellidos" name="Apellidos" class="form-control" required placeholder="Ingrese los apellidos" />
+                    <span id="Apellidos-error" class="text-danger" style="display:none;"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="Correo">
+                        <i class="fas fa-envelope"></i> Correo
+                    </label>
+                    <input type="email" id="Correo" name="Correo" class="form-control" required placeholder="ejemplo@dominio.com" />
+                    <span id="Correo-error" class="text-danger" style="display:none;"></span>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-modern btn-crear">
+                        <i class="fas fa-save"></i> Registrar Cliente
+                    </button>
+                    <button type="button" id="btnVolverReserva" class="btn-modern btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Volver a Reserva
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Estilos  */
+    .filter-btn {
+        @@apply px-6 py-3 rounded-full text-gray-700 bg-white shadow-md transition-all duration-300 flex items-center gap-2 hover:bg-blue-50 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500;
+    }
+    /* Botón Verde */
+    .modern-green-btn {
+        display: inline-block;
+        background: linear-gradient(to right, #4CAF50, #45a049);
+        color: white;
+        border: none;
+        border-radius: 25px;
+        font-weight: 500;
+        text-decoration: none;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        font-size: 16px;
+        padding: 12px 25px;
+        margin: 5px;
+    }
+
+        .modern-green-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 14px rgba(0, 0, 0, 0.15);
+            color: white;
+        }
+
+        .modern-green-btn:active {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .modern-green-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.3s ease;
+        }
+
+        .modern-green-btn:hover::before {
+            left: 100%;
+        }
+
+        .modern-green-btn i {
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .modern-green-btn:hover i {
+            transform: translateX(4px);
+        }
+
+    .filter-btn.active {
+        @@apply bg-blue-500 text-white hover:bg-blue-600;
+    }
+
+    .filter-icon {
+        @@apply text-xl;
+    }
+
+    .bobeda-card {
+        opacity: 1;
+        transition: all 0.3s ease-in-out;
+    }
+
+        .bobeda-card.hidden {
+            opacity: 0;
+            transform: scale(0.9);
+            pointer-events: none;
+        }
+
+    /* modales */
+    .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+        overflow-y: auto;
+        padding: 20px;
+    }
+
+    .modal-container {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        max-width: 550px;
+        max-height: 90vh;
+        overflow-y: auto;
+        position: relative;
+        animation: modal-appear 0.3s ease-out;
+    }
+
+    @@keyframes modal-appear {
+        from {
+            opacity: 0;
+            transform: translateY(-50px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 20px;
+        background: linear-gradient(to right, #4a90e2, #50c878);
+        color: white;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .modal-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin: 0;
+    }
+
+    .modal-close {
+        background: none;
+        border: none;
+        font-size: 24px;
+        color: white;
+        cursor: pointer;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: background-color 0.2s;
+    }
+
+        .modal-close:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+    .modal-body {
+        padding: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #4a5568;
+        }
+
+    .form-control {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: border-color 0.2s;
+    }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #4a90e2;
+            box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+        }
+
+    .form-actions {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 25px;
+    }
+
+    .btn-modern {
+        display: inline-block;
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-weight: 500;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    /* Estilos para alertas personalizadas */
+    .custom-alert {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 2000;
+        display: flex;
+        align-items: center;
+        min-width: 300px;
+        max-width: 450px;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        animation: slide-in 0.5s forwards;
+    }
+
+        .custom-alert.success {
+            background: linear-gradient(to right, #43c6ac, #30b989);
+            color: white;
+        }
+
+        .custom-alert.error {
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            color: white;
+        }
+
+    .alert-icon {
+        flex-shrink: 0;
+        font-size: 24px;
+        margin-right: 15px;
+    }
+
+    .alert-content {
+        flex-grow: 1;
+    }
+
+        .alert-content h4 {
+            margin: 0 0 5px;
+            font-weight: 600;
+        }
+
+        .alert-content p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+    .alert-close {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+        opacity: 0.7;
+        transition: opacity 0.3s;
+    }
+
+        .alert-close:hover {
+            opacity: 1;
+        }
+
+    @@keyframes slide-in {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    .btn-crear {
+        background: linear-gradient(to right, #4a90e2, #50c878);
+        color: white;
+        box-shadow: 0 4px 6px rgba(74, 144, 226, 0.25);
+    }
+
+        .btn-crear:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(74, 144, 226, 0.35);
+        }
+
+    .btn-secondary {
+        background: linear-gradient(to right, #6b7280, #4b5563);
+        color: white;
+        box-shadow: 0 4px 6px rgba(107, 114, 128, 0.25);
+    }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(107, 114, 128, 0.35);
+        }
+
+    .text-danger {
+        color: #e53e3e;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+</style>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Código de filtrado existente
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const bobedaCards = document.querySelectorAll('.bobeda-card');
+        const gridContainer = document.getElementById('bobedas-grid');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+
+                const filter = this.dataset.filter;
+
+                // Primera pasada: marcar elementos como visibles o invisibles
+                bobedaCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.estado === filter) {
+                        card.classList.remove('hidden');
+                        card.style.display = ''; // Mostrar el elemento
+                    } else {
+                        card.classList.add('hidden');
+                        card.style.display = 'none'; // Ocultar completamente
+                    }
+                });
+
+                // Forzar relayout del grid
+                gridContainer.style.display = 'none';
+                setTimeout(() => {
+                    gridContainer.style.display = 'grid';
+                }, 60);
+            });
+        });
+            document.getElementById("btnVolverReserva").addEventListener("click", function () {
+        // Cerrar el modal de cliente
+        document.getElementById("clienteModal").classList.remove("show");
+        document.getElementById("clienteModal").style.display = "none";
+
+        // Reabrir el modal de reserva
+        document.getElementById("reservaModal").classList.add("show");
+         reservaModal.style.display = "flex"; // modal se muestre como flex
+    reservaModal.style.justifyContent = "center"; // Centrar horizontalmente
+    reservaModal.style.alignItems = "center"; // Centrar verticalmente
+
+    });
+
+        // Código para los modales
+        const reservaModal = document.getElementById('reservaModal');
+        const clienteModal = document.getElementById('clienteModal');
+        const closeBtns = document.querySelectorAll('.modal-close');
+        const reservarBtns = document.querySelectorAll('.reservar-btn');
+        const btnNuevoCliente = document.getElementById('btnNuevoCliente');
+
+        // Funcionalidad para abrir el modal de reserva
+        reservarBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const bobedaId = this.getAttribute('data-id');
+                const bobedaSector = this.getAttribute('data-sector');
+
+                document.getElementById('bobedaId').textContent = bobedaId;
+                document.getElementById('IdBobedaModal').value = bobedaId;
+
+                // Cargar precio para esta bóveda usando su división/sector
+                cargarPrecioYDescripcion(bobedaSector);
+
+                // Mostrar el modal
+                reservaModal.style.display = 'flex';
+            });
+        });
+
+        // Abrir modal de nuevo cliente
+        btnNuevoCliente.addEventListener('click', function(e) {
+            e.preventDefault();
+            reservaModal.style.display = 'none';
+            clienteModal.style.display = 'flex';
+        });
+
+        // Cerrar modales
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                reservaModal.style.display = 'none';
+                clienteModal.style.display = 'none';
+            });
+        });
+
+        // Cerrar modal haciendo clic fuera
+        window.addEventListener('click', function(e) {
+            if (e.target === reservaModal) {
+                reservaModal.style.display = 'none';
+            }
+            if (e.target === clienteModal) {
+                clienteModal.style.display = 'none';
+            }
+        });
+
+        // Selección de cliente
+        document.getElementById('CedulaSelect').addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            if (selectedOption.value) {
+                document.getElementById('Nombre').value = selectedOption.getAttribute('data-nombre');
+                document.getElementById('Apellido').value = selectedOption.getAttribute('data-apellido');
+            } else {
+                document.getElementById('Nombre').value = '';
+                document.getElementById('Apellido').value = '';
+            }
+        });
+
+        // Función para cargar precio y descripción
+        function cargarPrecioYDescripcion(sector) {
+            fetch(`/Reservas/ObtenerPrecio?division=${encodeURIComponent(sector)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success !== false) {
+                        document.getElementById('PrecioValor').value = '$' + data.precioValor;
+                        document.getElementById('IdPrecio').value = data.idPrecio;
+
+                        // Obtener la descripción de la bóveda
+                        fetch(`/Reservas/ObtenerDescripcionBobeda?sector=${encodeURIComponent(sector)}`)
+                            .then(response => response.json())
+                            .then(descData => {
+                                if (descData.success !== false) {
+                                    document.getElementById('BobedaDescripcion').value = descData.descripcion;
+                                } else {
+                                    document.getElementById('BobedaDescripcion').value = 'Descripción no disponible';
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error al obtener la descripción:', error);
+                                document.getElementById('BobedaDescripcion').value = 'Error al cargar descripción';
+                            });
+                    } else {
+                        document.getElementById('PrecioValor').value = 'No disponible';
+                        document.getElementById('IdPrecio').value = '';
+                        document.getElementById('BobedaDescripcion').value = 'Descripción no disponible';
+                        mostrarAlerta('No se pudo obtener el precio para esta bóveda', 'error');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('PrecioValor').value = 'Error al cargar';
+                    mostrarAlerta('Error al obtener el precio', 'error');
+                });
+        }
+
+        // Enviar formulario de reserva
+        document.getElementById('reservaForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Validar que se haya seleccionado un cliente
+            if (!document.getElementById('CedulaSelect').value) {
+                mostrarAlerta('Por favor seleccione un cliente', 'error');
+                return;
+            }
+
+            // Validar que se haya cargado un precio
+            if (!document.getElementById('IdPrecio').value) {
+                mostrarAlerta('No se ha podido cargar el precio correctamente', 'error');
+                return;
+            }
+
+            const formData = new FormData(this);
+            const reservaData = {
+                IdCliente: formData.get('Cedula'),
+                IdBobeda: formData.get('IdBobeda'),
+                IdPrecio: formData.get('IdPrecio'),
+                Nombre: document.getElementById('Nombre').value,
+                Apellido: document.getElementById('Apellido').value,
+                EstadoPago: formData.get('EstadoPago'),
+                FechaReserva: formData.get('FechaReserva')
+            };
+
+            // Obtener el token antifalsificación
+            const token = document.querySelector('input[name="__RequestVerificationToken"]')?.value;
+
+            // Si no hay token en un input, intentar buscar en los meta tags
+            const metaToken = !token ? document.querySelector('meta[name="__RequestVerificationToken"]')?.content : null;
+
+            const csrfToken = token || metaToken || '';
+
+            // Verificar si ya existe una reserva para esta bóveda
+            fetch(`/Reservas/VerificarDisponibilidad?idBobeda=${reservaData.IdBobeda}`)
+                .then(response => response.json())
+                .then(disponibilidad => {
+                    if (!disponibilidad.disponible) {
+                        mostrarAlerta('Esta bóveda ya está reservada', 'error');
+                        return;
+                    }
+
+                    // Si está disponible, proceder con la reserva
+                    realizarReserva(reservaData, csrfToken);
+                })
+                .catch(error => {
+                    console.error('Error al verificar disponibilidad:', error);
+                    // Si hay error al verificar, intentar realizar la reserva de todos modos
+                    realizarReserva(reservaData, csrfToken);
+                });
+        });
+
+        function realizarReserva(reservaData, token) {
+            fetch('/Reservas/Create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': token,
+                    'RequestVerificationToken': token
+                },
+                body: JSON.stringify(reservaData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error en la respuesta del servidor');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    mostrarAlerta('¡Reserva creada con éxito!', 'success');
+
+                    // Actualizar el estado de la bóveda en la UI
+                    const bobedaCard = document.querySelector(`.reservar-btn[data-id="${reservaData.IdBobeda}"]`).closest('.bobeda-card');
+                    if (bobedaCard) {
+                        bobedaCard.dataset.estado = 'arriendo';
+                        bobedaCard.classList.remove('available');
+                        bobedaCard.classList.add('unavailable');
+
+                        // Actualizar el estado y el botón
+                        const estadoElement = bobedaCard.querySelector('strong.text-gray-800:contains("Estado:")').nextSibling;
+                        if (estadoElement) {
+                            estadoElement.textContent = 'arriendo';
+                        }
+
+                        const btnContainer = bobedaCard.querySelector('.mt-6');
+                        if (btnContainer) {
+                            btnContainer.remove();
+                        }
+
+                        // Actualizar el indicador de estado
+                        const estadoIndicator = bobedaCard.querySelector('.absolute.top-4.right-4 span');
+                        if (estadoIndicator) {
+                            estadoIndicator.className = 'bg-red-500 text-white px-3 py-1 rounded-full text-sm';
+                            estadoIndicator.textContent = 'Ocupada';
+                        }
+                    }
+
+                    setTimeout(() => {
+                        reservaModal.style.display = 'none';
+                        // Recargar la página para actualizar el estado de las bóvedas
+                        location.reload();
+                    }, 2000);
+                } else {
+                    mostrarAlerta('Error: ' + (data.message || 'No se pudo procesar la reserva'), 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                mostrarAlerta('Ocurrió un error al procesar la solicitud', 'error');
+            });
+        }
+
+        // Enviar formulario de cliente
+        document.getElementById('clienteForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Validar cédula ecuatoriana
+            const clave = document.getElementById('Clave').value;
+            if (!validarCedulaEcuatoriana(clave)) {
+                document.getElementById('Clave-error').textContent = 'La cédula ecuatoriana no es válida';
+                document.getElementById('Clave-error').style.display = 'block';
+                return;
+            } else {
+                document.getElementById('Clave-error').style.display = 'none';
+            }
+
+            const formData = new FormData(this);
+            const clienteData = {
+                Clave: formData.get('Clave'),
+                Nombres: formData.get('Nombres'),
+                Apellidos: formData.get('Apellidos'),
+                Correo: formData.get('Correo')
+            };
+
+            // Obtener el token antifalsificación
+            const token = document.querySelector('input[name="__RequestVerificationToken"]')?.value;
+
+            // Si no hay token en un input, intentar buscar en los meta tags
+            const metaToken = !token ? document.querySelector('meta[name="__RequestVerificationToken"]')?.content : null;
+
+            const csrfToken = token || metaToken || '';
+
+            fetch('/Clientes/CreateAjax', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken,
+                    'RequestVerificationToken': csrfToken
+                },
+                body: JSON.stringify(clienteData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error en la respuesta del servidor');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    mostrarAlerta('Cliente registrado con éxito', 'success');
+
+                    // Añadir el nuevo cliente al dropdown
+                    const select = document.getElementById('CedulaSelect');
+                    const option = document.createElement('option');
+                    option.value = data.clienteId || data.cliente.id; // Usar el ID devuelto por el servidor
+                    option.text = clienteData.Clave;
+                    option.setAttribute('data-nombre', clienteData.Nombres);
+                    option.setAttribute('data-apellido', clienteData.Apellidos);
+                    select.add(option);
+
+                    // Seleccionar el cliente recién creado
+                    select.value = data.clienteId || data.cliente.id;
+                    document.getElementById('Nombre').value = clienteData.Nombres;
+                    document.getElementById('Apellido').value = clienteData.Apellidos;
+
+                    // Limpiar el formulario
+                    document.getElementById('clienteForm').reset();
+
+                    setTimeout(() => {
+                        // Cerrar modal de cliente y mostrar modal de reserva
+                        clienteModal.style.display = 'none';
+                        reservaModal.style.display = 'flex';
+                    }, 60000);
+                } else {
+                    // Mostrar errores
+                    if (data.errors) {
+                        Object.keys(data.errors).forEach(key => {
+                            const errorElement = document.getElementById(key + '-error');
+                            if (errorElement) {
+                                errorElement.textContent = data.errors[key];
+                                errorElement.style.display = 'block';
+                            }
+                        });
+                    } else {
+                        mostrarAlerta('Error: ' + (data.message || 'No se pudo registrar el cliente'), 'error');
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                mostrarAlerta('Ocurrió un error al procesar la solicitud', 'error');
+            });
+        });
+
+        // Función para validar cédula ecuatoriana
+        function validarCedulaEcuatoriana(cedula) {
+            if (!/^\d{10}$/.test(cedula)) {
+                return false;
+            }
+
+            const provincia = parseInt(cedula.substring(0, 2));
+            if (provincia < 1 || provincia > 24) {
+                return false;
+            }
+
+            const tercerDigito = parseInt(cedula.charAt(2));
+            if (tercerDigito < 0 || tercerDigito > 6) {
+                return false;
+            }
+
+            let suma = 0;
+            for (let i = 0; i < 9; i++) {
+                let multiplicador = (i % 2 === 0) ? 2 : 1;
+                let valor = multiplicador * parseInt(cedula.charAt(i));
+                suma += (valor >= 10) ? valor - 9 : valor;
+            }
+
+            const ultimoDigito = parseInt(cedula.charAt(9));
+            const digitoVerificador = (10 - (suma % 10)) % 10;
+
+            return ultimoDigito === digitoVerificador;
+        }
+
+        // Función para mostrar alertas personalizadas
+        function mostrarAlerta(mensaje, tipo) {
+            // Eliminar alertas existentes
+            const alertasExistentes = document.querySelectorAll('.custom-alert');
+            alertasExistentes.forEach(alerta => alerta.remove());
+
+            // Crear nueva alerta
+            const alertDiv = document.createElement('div');
+            alertDiv.className = 'custom-alert ' + tipo;
+            alertDiv.innerHTML = `
+                <div class="alert-icon">
+                    <i class="fas fa-${tipo === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                </div>
+                <div class="alert-content">
+                    <h4>${tipo === 'success' ? '¡Éxito!' : '¡Error!'}</h4>
+                    <p>${mensaje}</p>
+                </div>
+                <button class="alert-close">&times;</button>
+            `;
+            document.body.appendChild(alertDiv);
+
+            // Cerrar alerta al hacer clic en el botón de cerrar
+            alertDiv.querySelector('.alert-close').addEventListener('click', function() {
+                alertDiv.remove();
+            });
+
+            // Cerrar automáticamente después de 1 min
+            setTimeout(() => {
+                if (document.body.contains(alertDiv)) {
+                    alertDiv.remove();
+                }
+            }, 600000);
+        }
+    });
+</script>
+@section Scripts {
+    <script src="~/js/dispo.js"></script>
+    }

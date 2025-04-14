@@ -1,0 +1,138 @@
+﻿@{
+    ViewBag.Title = "¿Quiénes Somos?";
+}
+
+<div class="container">
+    <header class="logo-header">
+        <div class="logo-wrapper">
+            <img src="~/Images/Logo_final.png" alt="Logotipo" class="logo">
+            </div>
+    </header>
+
+    <section class="about-section">
+        <!-- <h1 class="section-description">Cementerio San Agustín</h1>-->
+        <p class="section-title" data-aos="fade-up">
+            En el Cementerio San Agustín ha sido un lugar de paz y reconocimiento para nuestra comunidad.
+            Nuestro cementerio combina la tradición y el respeto por nuestros seres queridos.
+        </p>
+        <div class="image-container" data-aos="zoom-in">
+            <img src="https://www.almerianoticias.es/wp-content/uploads/2024/10/241031-CEMENTERIOS-2.jpeg" alt="Cementerio San Agustín" class="about-image">
+        </div>
+
+        
+            <div data-aos="fade-left">
+                <h1 class="section-description">Nuestra Historia</h1>
+            <p class="section-title">Fundado en 1890, el Cementerio Parroquial San Agustín ha sido testigo de la historia de nuestra comunidad por más de un siglo. Lo que comenzó como un humilde camposanto se ha convertido en un lugar de memoria y honor para nuestros seres queridos.</p>
+        </div>
+
+
+        <div data-aos="fade-right">
+            <h2 class="section-description">Nuestra Misión</h2>
+            <p class="section-title">Nos dedicamos a preservar la dignidad y la memoria de quienes descansan en nuestro cementerio, proporcionando un espacio de paz y reflexión para sus familias. Nuestro compromiso es mantener vivo el recuerdo de cada persona que forma parte de nuestra historia.</p>
+        </div>
+
+        
+            <div data-aos="fade-up">
+            <h2 class="section-description">Nuestros Valores</h2>
+            <ul class="section-title">
+                <li>Respeto por la dignidad humana</li>
+                <li>Compromiso con la preservación de la memoria</li>
+                <li>Excelencia en el servicio a las familias</li>
+                <li>Innovación en la gestión cementerial</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Chatbot -->
+    <div class="chatbot-trigger" id="chatTrigger">
+        <i class="fas fa-comment-dots"></i>
+    </div>
+
+    <!-- Chatbot Contenido -->
+    <div class="chat-container" id="chatContainer" style="display: none;">
+        <div class="chat-header">
+            <h4 class="mb-0"><i></i>🤖 Asistente Virtual</h4>
+            <button class="chat-close" id="chatClose">&times;</button>
+        </div>
+        <div class="chat-body" id="chatBody">
+            <!-- mensajes predeterminados-->
+        </div>
+        <div class="chat-suggestions">
+            <button class="suggestion-btn">¿Hay bóvedas disponibles?</button>
+            <button class="suggestion-btn">¿Cómo hacer una reserva?</button>
+            <button class="suggestion-btn">Consultar pagos pendientes</button>
+            <button class="suggestion-btn">Horario de atención</button>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chatInput" placeholder="Escribe tu mensaje...">
+            <button id="sendBtn">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    /* Contenedor del logo */
+    .logo-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    /* Logotipo más pequeño y centrado */
+    .logo {
+        width: 200px;
+        height: auto;
+    }
+
+    /* Título junto al logo */
+    .logo-title {
+        font-size: 1.8rem;
+        font-family: 'Georgia', serif;
+        font-weight: bold;
+        color: #333;
+        margin-top: 10px;
+    }
+
+    .section-description {
+        font-family: 'Georgia', serif;
+        font-size: 2rem;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .section-title {
+        font-family: 'Georgia', serif;
+        font-size: 1.5rem;
+        text-align: justify;
+    }
+   
+    /* 💵 Precio */
+    .game-price {
+        font-size: 16px;
+        color: #00ffcc;
+        font-weight: bold;
+    }
+</style>
+
+<!--script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const animatedElements = document.querySelectorAll('.animate-on-scroll');
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        animatedElements.forEach(el => observer.observe(el));
+    });
+</script-->

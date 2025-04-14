@@ -1,0 +1,121 @@
+﻿@{
+    ViewData["Title"] = "Cementerio Parroquial San Agustín";
+}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-content">
+        <h1 class="heros-title">Cementerio Parroquial San Agustín</h1>
+        <p class="hero-subtitle">Un espacio de paz y recuerdo desde 1890</p>
+    </div>
+</section>
+<!-- Main Content -->
+<main class="container">
+    <!-- Servicios -->
+    <section class="services-section py-5">
+        <h2 class="hero-title mb-5 display-4">Nuestros Servicios</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="service-card">
+                    <i class="fas fa-archway service-icon"></i>
+                    <!-- cambio letras desde aqui -->
+                    <h2 class="service-title">Bóvedas Disponibles</h2>
+                    <p class="service-description">Consulta disponibilidad en tiempo real</p>
+                    <a asp-controller="Home" asp-action="Disponibilidad" class="modern-btn">
+                        Verificar <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="service-card">
+                    <i class="fas fa-hand-holding-usd service-icon"></i>
+                    <h2 class="service-title">Gestión de Pagos</h2>
+                    <p class="service-description">Sistema seguro de administración</p>
+                    <a asp-controller="Home" asp-action="Gestion" class="modern-btn">
+                        Explorar <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="service-card">
+                    <i class="fas fa-comments service-icon"></i>
+                    <h2 class="service-title">Reserva en Linea</h2>
+                    <p class="service-description">Resuelve tus dudas con nuestro equipo</p>
+                    <a asp-controller="Home" asp-action="Contacto" class="modern-btn">
+                        Consultar <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Horarios -->
+    <section class="py-5">
+        <h2 class="hero-title mb-5 display-4">Horario de Visitas</h2>
+        <div class="row g-4 horarios-section">
+            <div class="col-md-4">
+                <div class="service-card horario-card">
+                    <div class="service-title">
+                        <!--<i class="fas fa-clock fa-2x mb-3"></i>-->
+                        <h3>Lunes a Viernes</h3>
+                        <div class="service-description">
+                            <p>8:00 AM - 6:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="service-card horario-card">
+                    <div class="service-title">
+                        <!--<i class="fas fa-clock fa-2x mb-3"></i>-->
+                        <h3>Fines de Semana</h3>
+                        <div class="service-description">
+                            <p>9:00 AM - 4:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="service-card horario-card">
+                    <div class="service-title">
+                        <!-- <i class="fas fa-clock fa-2x mb-3"></i>-->
+                        <h3>Feriados</h3>
+                        <div class="service-description">
+                            <p>11:00 AM - 6:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </main>
+    <!-- Chatbot -->
+    <div class="chatbot-trigger" id="chatTrigger">
+        <i class="fas fa-comment-dots"></i>
+    </div>
+
+    <!-- Chatbot Contenido -->
+    <div class="chat-container" id="chatContainer" style="display: none;">
+        <div class="chat-header">
+        <h4 class="mb-0"><i></i>🤖 Asistente Virtual</h4>
+            <button class="chat-close" id="chatClose">&times;</button>
+        </div>
+        <div class="chat-body" id="chatBody">
+            <!-- Los mensajes se agregarán dinámicamente con JavaScript -->
+        </div>
+        <div class="chat-suggestions">
+            <button class="suggestion-btn">¿Hay bóvedas disponibles?</button>
+            <button class="suggestion-btn">¿Cómo hacer una reserva?</button>
+            <button class="suggestion-btn">Consultar pagos pendientes</button>
+            <button class="suggestion-btn">Horario de atención</button>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chatInput" placeholder="Escribe tu mensaje...">
+            <button id="sendBtn">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+    @section Scripts {
+        <script src="~/js/chatbot.js"></script>
+    }

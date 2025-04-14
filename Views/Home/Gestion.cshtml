@@ -1,0 +1,132 @@
+﻿@model List<Reserva>
+@{
+    ViewData["Title"] = "Gestión de Pagos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/gestion.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/tabla.css" />
+
+<div class="gestion-container">
+    <div class="header-section">
+        <h1 class="elegant-title">Centro de Gestión de Pagos</h1>
+        <p class="elegant-subtitle">Administra tus reservas y realiza pagos pendientes de manera segura</p>
+    </div>
+
+    <div class="payment-dashboard">
+        <div class="search-section">
+            <h2>Buscar Reserva</h2>
+            <form asp-action="BuscarReserva" method="post" id="searchReserva" class="search-form">
+                <input type="text" name="Cedula" placeholder="Ingrese número de cédula" id="cedulaSearch" class="search-input" required>
+                <button type="submit" class="search-button">
+                    <i class="fas fa-search"></i> Buscar
+                </button>
+            </form>
+        </div>
+
+        <div class="results-section" id="resultsSection" style="display:none;">
+            <div class="table-container">
+                <table class="table table-modern" id="preciosTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Cédula</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Sector</th>
+                            <th>Precio</th>
+                            <th>Estado</th>
+                            <th>Descripción</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultsTableBody">
+                        <!-- Aquí se llenarán los resultados de la búsqueda dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+            <button id="btnPagar" class="btn-pagar-general" style="display:none;">
+                <i class="fas fa-money-bill-wave me-1"></i> Pagar
+            </button>
+        </div>
+
+        <div class="reserva-details" id="reservaDetails" style="display:none;">
+            <h3>Detalles de Reserva</h3>
+            <div class="card-details">
+                <div class="detail-row">
+                    <span class="label">Nombre:</span>
+                    <span id="nombreCliente"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Cédula:</span>
+                    <span id="cedulaCliente"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Bóveda:</span>
+                    <span id="bovedaDetalle"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Estado de Pago:</span>
+                    <span id="estadoPagoDetalle" class="status-badge"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Monto Pendiente:</span>
+                    <span id="montoPendiente"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="payment-methods" id="paymentMethods" style="display:none;">
+            <h2>Métodos de Pago</h2>
+            <div class="payment-grid">
+                <div class="payment-option" data-method="transferencia">
+                    <i class="fas fa-exchange-alt"></i>
+                    <h3>Transferencia Bancaria</h3>
+                </div>
+                <div class="payment-option" data-method="deposito">
+                    <i class="fas fa-piggy-bank"></i>
+                    <h3>Depósito</h3>
+                </div>
+                <div class="payment-option" data-method="tarjeta">
+                    <i class="fas fa-credit-card"></i>
+                    <h3>Tarjeta de Crédito</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="payment-form" id="paymentForm" style="display:none;">
+            <h2>Completar Pago</h2>
+            <form id="paymentProcessForm" asp-action="ProcesarPago" method="post" enctype="multipart/form-data">
+                <input type="hidden" id="reservaId" name="ReservaId">
+                <div class="form-group">
+                    <label>Método de Pago</label>
+                    <input type="text" id="metodoPago" name="MetodoPago" readonly class="form-control">
+                </div>
+
+                <div class="form-group" id="comprobante-section" style="display:none;">
+                    <label>Subir Comprobante</label>
+                    <input type="file" id="comprobanteFile" name="Comprobante"
+                           accept=".pdf,.jpg,.jpeg,.png" class="form-control-file" required>
+                </div>
+
+                <div class="form-group" id="tarjeta-section" style="display:none;">
+                    <label>Datos de Tarjeta de Crédito</label>
+                    <input type="text" id="tarjetaNumero" name="NumeroTarjeta"
+                           placeholder="Número de Tarjeta" class="form-control" required>
+                    <div class="card-details-row">
+                        <input type="text" id="tarjetaExp" name="FechaExpiracion"
+                               placeholder="MM/AA" class="form-control" required>
+                        <input type="text" id="tarjetaCVV" name="CVV"
+                               placeholder="CVV" class="form-control" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-payment">Confirmar Pago</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/gestion.js"></script>
+}

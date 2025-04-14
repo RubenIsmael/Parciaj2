@@ -1,0 +1,806 @@
+/* ============== */
+/* VARIABLES CSS */
+/* ============== */
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --accent-color: #e74c3c;
+    --light-gray: #f8f9fa;
+    --dark-gray: #7f8c8d;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============== */
+/* FUENTES */
+/* ============== */
+@font-face {
+    font-family: 'Iglesia';
+    src: url('../Fonts/BaroqueAntiqueScript.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Cali';
+    src: url('../Fonts/Calli.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Motion Picture';
+    src: url('../Fonts/Iglesia Light.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Plom';
+    src: url('../Fonts/PlomPraeng.ttf') format('truetype');
+}
+/* ============== */
+/* ESTILOS BASE */
+/* ============== */
+body {
+    font-family: 'Plom', sans-serif; /* Familia de fuente para todo el documento */
+    color: var(--primary-color); /* Color de texto principal */
+    margin-top: 80px; /* Espacio superior para el menú fijo */
+    background-color: var(--light-gray); /* Color de fondo de la página */
+    line-height: 1.6; /* Espaciado entre líneas */
+    font-size: 20px; /* Tamaño base de fuente para todo el documento */
+}
+
+.center {
+    justify-content: center; /* Centrar contenido horizontalmente */
+    padding: 1.5rem; /* Relleno interno */
+    text-align: center; /* Alinear texto al centro */
+    font-size: 3.5rem; /* Tamaño de fuente muy grande para títulos o encabezados */
+}
+
+/* ============== */
+/* NAVBAR (MENÚ DE NAVEGACIÓN) */
+/* ============== */
+.navbar {
+    position: fixed; /* Menú fijo en la parte superior */
+    top: 0; /* Pegado a la parte superior */
+    width: 100%; /* Ancho completo */
+    z-index: 1000; /* Capa superior para que esté sobre otros elementos */
+    background: rgba(255, 255, 255, 0.98) !important; /* Fondo blanco casi opaco */
+    backdrop-filter: blur(10px); /* Efecto de desenfoque de fondo */
+    transition: var(--transition); /* Transición suave para cambios */
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+.logo {
+    width: 300px !important;
+    height: auto !important;
+}
+.logo-img {
+    height: 120px; /* Altura fija para el logo */
+    transition: var(--transition); /* Transición suave */
+}
+
+.menu-link {
+    color: var(--primary-color) !important; /* Color de texto de los enlaces */
+    font-size: 1.65rem; /* TAMAÑO DE LETRA DE LOS ENLACES DEL MENÚ (clave para tu pregunta) */
+    position: relative; /* Posicionamiento relativo para efectos */
+    margin: 0 1rem; /* Márgenes horizontales entre enlaces */
+    transition: var(--transition); /* Transición suave */
+}
+
+    /* Efectos hover (al pasar el mouse) sobre los enlaces */
+    .menu-link:hover {
+        color: var(--secondary-color) !important; /* Cambio de color al pasar el mouse */
+        transform: translateY(-2px); /* Ligero desplazamiento hacia arriba */
+    }
+
+    /* Efecto de línea subrayada al pasar el mouse */
+    .menu-link::after {
+        content: ''; /* Crea un pseudo-elemento */
+        position: absolute; /* Posicionamiento absoluto */
+        width: 0; /* Ancho inicial cero */
+        height: 2px; /* Altura de la línea */
+        bottom: 0; /* Pegado a la parte inferior */
+        left: 0; /* Alineado a la izquierda */
+        background: var(--secondary-color); /* Color de la línea */
+        transition: var(--transition); /* Transición suave */
+    }
+
+    /* Expandir línea al pasar el mouse */
+    .menu-link:hover::after {
+        width: 100%; /* Línea ocupa todo el ancho */
+    }
+
+/* ============== */
+/* HERO SECTION */
+/* ============== */
+.hero-section {
+    height: 70vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://media.istockphoto.com/id/1071164602/es/foto/buganvillas-gran-%C3%A1rbol-en-el-cementerio-en-san-agustin-etla.jpg?s=612x612&w=0&k=20&c=Q8hL_xuB4KXoizAMLnARupXBPXMit3GcoMXXeqIisPk=') center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    position: relative;
+    margin-bottom: 3rem;
+     border-radius: 3%;
+    overflow: hidden;
+}
+
+.hero-content {
+    max-width: 1500px;
+    padding: 0 2rem;
+}
+
+.hero-title {
+    font-family: 'Cali', sans-serif;
+    font-size: 3.25rem;
+    /*text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 1.5rem;*/
+    align-items: center;
+    justify-content: center;
+}
+.heros-title {
+    font-family: 'Cali', sans-serif;
+    font-size: 4.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 1.5rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-subtitle {
+    font-family: 'Iglesia', sans-serif;
+        font-size: 1.75rem;
+    opacity: 0.9;
+}
+.service-title {
+    font-family: 'Plom', sans-serif;
+    font-size: 1.4rem;
+    opacity: 0.9;
+    font-weight: bold;
+}
+.service-description {
+    font-family: 'Plom', sans-serif;
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+/* ============== */
+/* SERVICIOS */
+/* ============== */
+.services-section {
+    padding: 4rem 0;
+}
+
+.service-card {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    text-align: center;
+    transition: var(--transition);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+    .service-card:hover {
+        transform: translateY(-0.5rem);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    }
+.service-icon {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+    transition: var(--transition);
+}
+
+.service-card:hover .service-icon {
+    transform: scale(1.2);
+}
+
+/* ============== */
+/* HORARIOS */
+/* ============== */
+.schedule-card {
+    background: white;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-align: center;
+    transition: var(--transition);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+    .schedule-card i {
+        font-size: 2rem;
+        color: var(--primary-color);
+    }
+/* letras tranciciones */
+/* ============== */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1s ease-out;
+}
+
+.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+.about-section {
+    background: linear-gradient(to bottom, #ffffff, #f0f0f0);
+    padding: 3rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    transition: var(--transition);
+    margin-top: 2rem;
+}
+
+.about-image {
+    width: 100%;
+    max-width: 800px;
+    border-radius: 1rem;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    margin-top: 1rem;
+}
+
+
+/* ============== */
+/* logo tranciciones */
+/* ============== */
+
+.logo-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeInUp 1.5s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ============== */
+/* CHATBOT */
+/* ============== */
+
+
+.chatbot-trigger {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--secondary-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    transition: var(--transition);
+    z-index: 1000;
+}
+
+    .chatbot-trigger:hover {
+        background: var(--primary-color);
+        transform: scale(1.1);
+    }
+
+/* ============== */
+/* RESPONSIVE */
+/* ============== */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 3.5rem;
+    }
+
+    .navbar-scrolled .logo-img {
+        height: 120px;
+    }
+
+    .service-card {
+        margin: 1rem 0;
+    }
+}
+
+/* Estilo mejorado para las tarjetas de horarios */
+.horarios-section .service-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(240, 248, 255, 0.9));
+    border-radius: 1rem;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(100, 180, 250, 0.3);
+}
+
+    /* Efecto de agua en el fondo */
+    .horarios-section .service-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJ3YXRlciIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSgzMCkiPjxwYXRoIGQ9Ik0gMCwxMCBDIDIwLDIsIDQwLDUsIDUwLDEwIEM2MCwxNSA4MCwxOCAxMDAsMTAgTDEwMCw1MCBDODA0Miw2MCwyNSw1MCwxMCBMMCwxMCBaIiBmaWxsPSJyZ2JhKDEwMCwxODAsMjUwLDAuMSkiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjd2F0ZXIpIi8+PC9zdmc+') center/cover;
+        opacity: 0.15;
+        z-index: -1;
+        border-radius: 1rem;
+    }
+
+    /* Efecto de hover mejorado */
+    .horarios-section .service-card:hover {
+        transform: translateY(-0.7rem) scale(1.02);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12), 0 0 15px rgba(100, 180, 250, 0.3);
+        border-color: rgba(100, 180, 250, 0.5);
+    }
+
+        /* Efecto de resplandor al hover */
+        .horarios-section .service-card:hover::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 1rem;
+            box-shadow: 0 0 20px rgba(100, 180, 250, 0.4) inset;
+            z-index: -1;
+        }
+
+/* Estilo para el título dentro de la tarjeta */
+.horarios-section .service-title h3 {
+    font-family: 'Plom', sans-serif;
+    font-size: 1.6rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 8px;
+}
+.menues {
+    font-family: 'Motion Picture'
+}
+    /* Subrayado estilizado para el título */
+    .horarios-section .service-title h3::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 25%;
+        width: 50%;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, rgba(100, 180, 250, 0.7), transparent);
+        border-radius: 2px;
+    }
+
+/* Estilo para la descripción (horarios) */
+.horarios-section .service-description p {
+    font-family: 'Plom', sans-serif;
+    font-size: 1.3rem;
+    color: #3498db;
+    margin-top: 1rem;
+    letter-spacing: 0.5px;
+}
+
+/* Animación al cargar la página */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.horarios-section .service-card {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.horarios-section .col-md-4:nth-child(1) .service-card {
+    animation-delay: 0.1s;
+}
+
+.horarios-section .col-md-4:nth-child(2) .service-card {
+    animation-delay: 0.3s;
+}
+
+.horarios-section .col-md-4:nth-child(3) .service-card {
+    animation-delay: 0.5s;
+}
+/* Botón Azul */
+.modern-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: linear-gradient(to right, #1e88e5, #1565c0);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-weight: 500;
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    font-size: 22px;
+    padding: 12px 25px;
+    margin: 5px;
+}
+
+    .modern-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 7px 14px rgba(0, 0, 0, 0.15);
+        color: white;
+    }
+
+    .modern-btn:active {
+        transform: translateY(-1px);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .modern-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to right, rgba(255, 255, 255, 0.2), transparent);
+        transition: all 0.3s ease;
+    }
+
+    .modern-btn:hover::before {
+        left: 100%;
+    }
+
+    .modern-btn i {
+        margin-left: 8px;
+        transition: transform 0.3s ease;
+    }
+
+    .modern-btn:hover i {
+        transform: translateX(4px);
+    }
+/* Botón Verde */
+.modern-green-btn {
+    display: inline-block;
+        background: linear-gradient(to right, #4CAF50, #45a049);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-weight: 500;
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    font-size: 22px;
+    padding: 12px 25px; 
+    margin: 5px;
+}
+
+    .modern-green-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 7px 14px rgba(0, 0, 0, 0.15);
+        color: white;
+    }
+
+    .modern-green-btn:active {
+        transform: translateY(-1px);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .modern-green-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to right, rgba(255, 255, 255, 0.2), transparent);
+        transition: all 0.3s ease;
+    }
+
+    .modern-green-btn:hover::before {
+        left: 100%;
+    }
+
+    .modern-green-btn i {
+        margin-left: 8px;
+        transition: transform 0.3s ease;
+    }
+
+    .modern-green-btn:hover i {
+        transform: translateX(4px);
+    }
+
+/* ============== */
+/* SECCIÓN ACERCA DE */
+/* ============== */
+.about-section {
+    padding: 4rem 2rem;
+    background-color: var(--light-gray);
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-family: 'Plom', sans-serif;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    font-size: 18px;
+}
+
+.section-description {
+    font-family: 'Plom', sans-serif;
+    font-size: 1.2rem;
+    color: var(--dark-gray);
+    margin-bottom: 2rem;
+}
+
+.image-container {
+    margin-bottom: 2rem;
+}
+
+.about-image {
+    max-width: 100%;
+    border-radius: 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.schedule-section {
+    margin-top: 3rem;
+    background-color: rgba(52, 152, 219, 0.1);
+    border-radius: 1rem;
+    padding: 2rem;
+}
+
+.schedule-title {
+    font-size: 1.8rem;
+    font-family: 'Plom', sans-serif;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+.schedule-list {
+    list-style-type: none;
+    padding: 0;
+    font-size: 1rem;
+}
+
+    .schedule-list li {
+        margin: 0.5rem 0;
+        color: var(--primary-color);
+    }
+
+/* Estilo para el chatbot */
+.chatbot-container {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+}
+
+.chatbot-trigger {
+    cursor: pointer;
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+    padding: 1rem;
+    color: white;
+    transition: var(--transition);
+}
+
+    .chatbot-trigger:hover {
+        background-color: var(--primary-color);
+    }
+/*.rainbow {
+    font-family: 'Plom', sans-serif;
+    background: linear-gradient(70deg, red, orange, yellow, green, blue, indigo, violet);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 4em;  Tamaño texto
+text-align: center; 
+}
+ Contenedor del logo */
+/* Estilos para la página de contacto */
+.contact-container {
+    background-color: #f8f9fa;
+}
+
+.contact-title {
+    font-family: 'Georgia', serif;
+    font-weight: 700;
+    color: #333;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+    .contact-title:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(to right, #1e88e5, #1565c0);
+    }
+
+.contact-subtitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Tarjetas con efecto de elevación */
+.contact-form-card,
+.contact-info-card,
+.contact-chat-card,
+.contact-map-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+    .contact-form-card:hover,
+    .contact-info-card:hover,
+    .contact-chat-card:hover,
+    .contact-map-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+    }
+
+/* Estilos para los campos del formulario */
+.form-control {
+    border: 1px solid #e0e0e0;
+    border-radius: 0 4px 4px 0;
+    padding: 12px 15px;
+    height: auto;
+    transition: all 0.3s ease;
+}
+
+    .form-control:focus {
+        border-color: #1e88e5;
+        box-shadow: 0 0 0 0.2rem rgba(30, 136, 229, 0.25);
+    }
+
+.input-group-text {
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px 0 0 4px;
+    color: #6c757d;
+}
+
+/* Estilos para la información de contacto */
+.contact-info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.contact-info-icon {
+    flex: 0 0 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(to right, #1e88e5, #1565c0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    margin-right: 15px;
+}
+
+.contact-info-text h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.contact-info-text p {
+    margin-bottom: 0;
+    color: #666;
+}
+
+.contact-info-text a {
+    color: #1e88e5;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+    .contact-info-text a:hover {
+        color: #1565c0;
+    }
+
+/* Estilos para el chat */
+.contact-chat-card {
+    background: linear-gradient(135deg, #f5f7fa, #eef2f5);
+    border-left: 4px solid #1e88e5;
+}
+
+.chat-btn {
+    width: 100%;
+    padding: 12px 24px;
+}
+
+/* Estilos para el mapa */
+.map-container {
+    height: 300px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #f8f9fa;
+}
+    .map-container iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+.share-btn:hover {
+    background: linear-gradient(to right, #128C7E, #075E54);
+}
+.share-btn i {
+    font-size: 1.2rem;
+    margin-left: 8px;
+}
+.share-btn {
+    background: linear-gradient(to right, #25D366, #128C7E);
+    margin-top: 15px;
+}
+.map-placeholder {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #6c757d;
+}
+
+    .map-placeholder i {
+        font-size: 3rem;
+        margin-bottom: 15px;
+        color: #1e88e5;
+    }
+
+/* Animaciones */
+.fade-in {
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .contact-info-card, .contact-chat-card {
+        margin-bottom: 30px;
+    }
+}
+/* Estilos para las letras de contacto */
+.plom-font {
+    font-family: 'Plom', sans-serif;
+    font-size: 1.75rem;
+}

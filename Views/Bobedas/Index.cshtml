@@ -1,0 +1,89 @@
+﻿@model IEnumerable<San_Agustin_Final.Models.Bobeda>
+@{
+    ViewData["Title"] = "Bóvedas"; // Título de página
+    Layout = "~/Views/Shared/_Layout.cshtml"; //  Layout
+}
+<!-- Link a Font Awesome para íconos -->
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">-->
+<link rel="stylesheet" href="~/css/admi.css" />
+
+<!--  Contenedor fluido con diseño moderno -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <!--Título con margen -->
+            <h1 class="mb-4">Administración de Bóvedas</h1>
+            <!-- Contenedor de búsqueda con nuevo diseño -->
+            <div class="contenedor-busqueda mb-3">
+                <!-- Barra de búsqueda con icono -->
+                <div class="input-group">
+                    <span class="input-group-text bg-primary text-white">
+                        <i class="fas fa-search"></i>
+                    </span>
+                    <input type="text" id="searchInput" class="input-busqueda form-control" placeholder="Buscar bóvedas...">
+                </div>
+            </div>
+        <div>
+                <!--  Botón de creación con estilo moderno -->
+                <a asp-action="Create" class="btn btn-success my-1">✍️ Nueva Bóveda </a>
+            
+            </div>
+            <div>
+                <p>
+
+                </p>
+            </div>
+
+            <!-- Contenedor de tabla con sombra y fondo blanco -->
+            <link rel="stylesheet" href="~/css/tabla.css" />
+            <div class="table-container">
+                <!-- Tabla con clases modernas -->
+                <table class="table table-modern" id="bobedasTable">
+                    <thead>
+                        <tr>
+                            <th>División</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td data-label="División" class="division-column">@item.Division</td>
+                                <td data-label="Estado" class="estado-column">@item.Estado</td>
+                                <td data-label="Acciones" class="acciones-column">
+                                    <!-- Botones de acción con iconos -->
+                                    <div class="d-flex gap-2">
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning my-1">
+                                            <i class="fas fa-edit me-1"></i>Editar
+                                        </a>
+                                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info my-1">
+                                            <i class="fas fa-info-circle me-1"></i>Detalles
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger my-1">
+                                            <i class="fas fa-trash me-1"></i>Eliminar
+                                        </a>
+                                           </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  Script para búsqueda en tabla -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#searchInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#bobedasTable tbody tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>

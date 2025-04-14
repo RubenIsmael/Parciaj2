@@ -1,0 +1,50 @@
+﻿@model San_Agustin_Final.Models.Bobeda
+
+@{
+    ViewData["Title"] = "Eliminar Bóveda";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Enlace a Font Awesome para iconos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="stylesheet" href="~/css/admi.css" />
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <!-- Tarjeta con sombra y diseño más profundo -->
+        <div class="card shadow-lg border-0 rounded-lg mt-5">
+            <!-- Encabezado con gradiente de color -->
+            <div class="card-header bg-primary text-white text-center"
+                 style="background: linear-gradient(to right, #4a90e2, #50c878);">
+                <h1 class="my-2">Confirmar Eliminación</h1>
+            </div>
+
+            <!-- Cuerpo de la tarjeta con más espaciado -->
+            <div class="card-body p-4">
+                <h3>¿Está seguro de eliminar este registro?</h3>
+                <hr />
+                <dl class="row">
+                    <dt class="col-sm-4">División</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Division)</dd>
+
+                    <dt class="col-sm-4">Estado</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Estado)</dd>
+                </dl>
+
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group text-center mt-4">
+                        <input type="submit" value="Confirmar Eliminación" class="btn btn-danger me-2" />
+                        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

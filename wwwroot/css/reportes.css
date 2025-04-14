@@ -1,0 +1,162 @@
+/* Estilos para el dashboard de reportes */
+
+/* Estilos generales */
+.dashboard-container {
+    padding: 20px 0;
+    position: relative;
+}
+
+/* Animaciones de entrada */
+[data-aos] {
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+}
+
+    [data-aos].aos-animate {
+        opacity: 1;
+    }
+
+[data-aos="fade-up"] {
+    transform: translateY(30px);
+}
+
+    [data-aos="fade-up"].aos-animate {
+        transform: translateY(0);
+    }
+
+[data-aos="fade-right"] {
+    transform: translateX(-30px);
+}
+
+    [data-aos="fade-right"].aos-animate {
+        transform: translateX(0);
+    }
+
+/* Tarjetas KPI */
+.kpi-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 5px solid transparent;
+}
+
+    .kpi-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .kpi-card:nth-child(1) {
+        border-left-color: #4e73df;
+    }
+
+    .kpi-card:nth-child(2) {
+        border-left-color: #1cc88a;
+    }
+
+    .kpi-card:nth-child(3) {
+        border-left-color: #e74a3b;
+    }
+
+/* Estilos para gráficos */
+#mainChart, #secondaryChart {
+    min-height: 400px;
+    transition: all 0.3s ease;
+}
+
+/* Loading overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* Estilos para la tabla */
+.table {
+    font-size: 0.9rem;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(78, 115, 223, 0.05);
+}
+
+/* Personalizar estilos de selectores y inputs */
+.form-select, .form-control {
+    border-radius: 10px;
+    border: 1px solid #d1d3e2;
+    padding: 0.8rem 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .form-select:focus, .form-control:focus {
+        border-color: #4e73df;
+        box-shadow: 0 0 0 0.25rem rgba(78, 115, 223, 0.25);
+    }
+
+/* Efectos en botones */
+.btn {
+    border-radius: 10px;
+    padding: 0.5rem 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #4e73df;
+    border-color: #4e73df;
+}
+
+    .btn-primary:hover {
+        background-color: #2e59d9;
+        border-color: #2653d4;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(78, 115, 223, 0.3);
+    }
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .kpi-card {
+        margin-bottom: 15px;
+    }
+
+    .card-header {
+        padding: 0.75rem;
+    }
+
+    .display-4 {
+        font-size: 2rem;
+    }
+}
+
+/* Estilos para impresión */
+@media print {
+    .dashboard-header h1 {
+        color: #000 !important;
+        font-size: 24pt;
+    }
+
+    .card {
+        break-inside: avoid;
+        border: 1px solid #ddd;
+        box-shadow: none !important;
+    }
+
+    .btn,
+    #loadingOverlay,
+    .no-print {
+        display: none !important;
+    }
+
+    .table {
+        width: 100% !important;
+    }
+
+    #dataTable td,
+    #dataTable th {
+        padding: 5px;
+    }
+}

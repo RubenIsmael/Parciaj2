@@ -1,0 +1,222 @@
+﻿@{
+    ViewBag.Title = "Aporte";
+}
+
+<div class="container-fluid py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="body">
+                <h1 class="center">Aporte a la Comunidad</h1>
+            </div>
+            <div>
+                <p></p>
+            </div>
+
+            <div class="community-accordion">
+                <link rel="stylesheet" href="~/css/aporte.css" asp-append-version="true" />
+                <div class="section-wrapper">
+                    <h2 class="contact-subtitlee toggle-section" data-target="comunidad">
+                        <span data-aos="fade-left" class="section-indicator">▶ Compromiso con la Comunidad</span>
+                        
+                    </h2>
+                    <div class="section-content" id="comunidad">
+                        <p data-aos="fade-right" class="text-largee">
+                            En el Cementerio Parroquial San Agustín, creemos firmemente en la importancia de contribuir al bienestar de nuestra comunidad. A través de diversas iniciativas, buscamos apoyar a aquellos que más lo necesitan y fomentar un sentido de unidad y solidaridad.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="section-wrapper">
+                    <h2 class="contact-subtitlee toggle-section" data-target="patronato">
+                        <span data-aos="fade-left" class="section-indicator">▶  Colaboración con el Patronato de la Comunidad</span>
+                       
+                    </h2>
+                    <div class="section-content" id="patronato">
+                        <p data-aos="fade-right" class="text-largee">
+                            Nuestro cementerio colabora activamente con el Patronato de la Comunidad para llevar a cabo proyectos que beneficien a los más vulnerables. Esto incluye la organización de eventos benéficos, la recolección de donaciones y la promoción de actividades que fortalezcan el tejido social.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="section-wrapper">
+                    <h2 class="contact-subtitlee toggle-section" data-target="orfanatos">
+                        <span data-aos="fade-left" class="section-indicator">▶ Apoyo a Orfanatos</span>
+                        Apoyo a Orfanatos
+                    </h2>
+                    <div class="section-content" id="orfanatos">
+                        <p data-aos="fade-right" class="text-largee">
+                            También nos comprometemos a apoyar a los orfanatos de la región. A través de donaciones y actividades de recaudación de fondos, buscamos proporcionar recursos y apoyo emocional a los niños y niñas que se encuentran en situaciones difíciles. Creemos que cada niño merece una oportunidad y un entorno amoroso.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="section-wrapper">
+                    <h2 class="contact-subtitlee toggle-section" data-target="ayudar">
+                        <span data-aos="fade-left" class="section-indicator">▶ Cómo Puedes Ayudar</span>
+                       
+                    </h2>
+                    <div class="section-content" id="ayudar">
+                        <p data-aos="fade-right" class="text-largee">
+                            Te invitamos a unirte a nuestras iniciativas. Puedes contribuir de diversas maneras, ya sea a través de donaciones, participando en nuestros eventos o simplemente compartiendo esta información con quienes puedan estar interesados en ayudar. Juntos, podemos hacer una diferencia significativa en la vida de aquellos que nos rodean.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div data-aos="fade-up" class="text-largee:hover">
+                <a href="https://wa.me/+593996344075?text=Estoy interesado en ayudar al Cementerio Parroquial San Agustín en sus iniciativas comunitarias."
+                   target="_blank"
+                   data-aos="fade-up" class="modern-btn share-btn">
+                    Compartir Iniciativas por WhatsApp
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+            </div>
+
+            <!-- Chatbot -->
+            <div class="chatbot-trigger" id="chatTrigger">
+                <i class="fas fa-comment-dots"></i>
+            </div>
+
+            <!-- Chatbot Contenido -->
+            <div class="chat-container" id="chatContainer" style="display: none;">
+                <div class="chat-header">
+                    <h4 class="mb-0"><i></i>🤖 Asistente Virtual</h4>
+                    <button class="chat-close" id="chatClose">&times;</button>
+                </div>
+                <div class="chat-body" id="chatBody">
+                    <!-- mensajes predeterminados-->
+                </div>
+                <div class="chat-suggestions">
+                    <button class="suggestion-btn">¿Hay bóvedas disponibles?</button>
+                    <button class="suggestion-btn">¿Cómo hacer una reserva?</button>
+                    <button class="suggestion-btn">Consultar pagos pendientes</button>
+                    <button class="suggestion-btn">Horario de atención</button>
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="chatInput" placeholder="Escribe tu mensaje...">
+                    <button id="sendBtn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="contact-map-card">
+                        <h2 class="contact-subtitle mb-4">Nuestra Ubicación</h2>
+                        <div class="map-container">
+                            <!-- Google Maps iframe -->
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d255348.3687389964!2d-79.56375087482424!3d0.009836400000003881!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fd555000248b24b%3A0x6b60a1037893ad9e!2sCentro%20Intercultural%20La%20Concordia!5e0!3m2!1ses-419!2sec!4v1742518605677!5m2!1ses-419!2sec"
+                                    width="100%"
+                                    height="450"
+                                    style="border:0;"
+                                    allowfullscreen=""
+                                    loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Accordion functionality
+            const sections = document.querySelectorAll('.toggle-section');
+
+            sections.forEach(section => {
+                section.addEventListener('click', function() {
+                    // Toggle active class and rotation of indicator
+                    this.classList.toggle('active');
+                    const indicator = this.querySelector('.section-indicator');
+
+                    // Find the corresponding content
+                    const targetId = this.getAttribute('data-target');
+                    const content = document.getElementById(targetId).closest('.section-content');
+
+                    // Close other sections
+                    sections.forEach(otherSection => {
+                        if (otherSection !== this) {
+                            otherSection.classList.remove('active');
+                            const otherIndicator = otherSection.querySelector('.section-indicator');
+                            otherIndicator.textContent = '▶';
+
+                            const otherId = otherSection.getAttribute('data-target');
+                            const otherContent = document.getElementById(otherId).closest('.section-content');
+                            otherContent.style.display = 'none';
+                        }
+                    });
+
+                    // Toggle current section
+                    if (content.style.display === 'block') {
+                        content.style.display = 'none';
+                        indicator.textContent = '▶';
+                    } else {
+                        content.style.display = 'block';
+                        indicator.textContent = '▼';
+                    }
+                });
+            });
+
+            // Map card fade-in animation
+            $('.contact-map-card').addClass('fade-in');
+
+            // Chatbot logic
+            $('#chatTrigger').click(function () {
+                $('#chatContainer').toggle();
+            });
+
+            $('#chatClose').click(function () {
+                $('#chatContainer').hide();
+            });
+        });
+    </script>
+
+    <style>
+        .community-accordion {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-wrapper {
+            margin-bottom: 10px;
+            border-left: 4px solid #3498db;
+        }
+
+        .contact-subtitlee.toggle-section {
+            background-color: #f0f4f8;
+            color: #2c3e50;
+            padding: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            transition: background-color 0.3s ease;
+        }
+
+            .contact-subtitlee.toggle-section:hover {
+                background-color: #e6eaf0;
+            }
+
+        .section-indicator {
+            margin-right: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .section-content {
+            display: none;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid transparent;
+        }
+
+            .section-content .text-largee {
+                margin: 0;
+                color: #34495e;
+                line-height: 1.6;
+            }
+    </style>
+}

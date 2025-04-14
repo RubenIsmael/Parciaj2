@@ -1,0 +1,66 @@
+﻿@model San_Agustin_Final.Models.Reserva
+
+@{
+    ViewData["Title"] = "Eliminar Reserva";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Enlace a Font Awesome para iconos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="stylesheet" href="~/css/admi.css" />
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <!-- Tarjeta con sombra y diseño más profundo -->
+        <div class="card shadow-lg border-0 rounded-lg mt-5">
+            <!-- Encabezado con gradiente de color -->
+            <div class="card-header bg-primary text-white text-center"
+                 style="background: linear-gradient(to right, #4a90e2, #50c878);">
+                <h1 class="my-2">Confirmar Eliminación</h1>
+            </div>
+
+            <!-- Cuerpo de la tarjeta con más espaciado -->
+            <div class="card-body p-4">
+                <h3>¿Está seguro de eliminar esta reserva?</h3>
+                <hr />
+                <h4>Detalles de la Reserva</h4>
+                <dl class="row">
+                    <dt class="col-sm-4">Cliente</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Cliente.Clave)</dd>
+
+                    <dt class="col-sm-4">Nombre</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Nombre)</dd>
+
+                    <dt class="col-sm-4">Apellido</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Apellido)</dd>
+
+                    <dt class="col-sm-4">Estado de Pago</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.EstadoPago)</dd>
+
+                    <dt class="col-sm-4">Fecha de Reserva</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.FechaReserva)</dd>
+
+                    <dt class="col-sm-4">Sector</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Precio.Sector)</dd>
+
+                    <dt class="col-sm-4">Precio</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Precio.PrecioValor)</dd>
+                </dl>
+
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group text-center mt-4">
+                        <input type="submit" value="Confirmar Eliminación" class="btn btn-danger me-2" />
+                        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

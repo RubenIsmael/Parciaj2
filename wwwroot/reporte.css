@@ -1,0 +1,489 @@
+﻿/* Estilos para la página de reportes */
+.reportes-container {
+    display: flex;
+    height: calc(100vh - 100px);
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    margin: -1rem;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background: linear-gradient(180deg, #1a3c70 0%, #2d5ca3 100%);
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.sidebar-header {
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+    .sidebar-header h3 {
+        margin: 0;
+        font-size: 1.4rem;
+        font-weight: 600;
+    }
+
+.sidebar-menu {
+    padding: 20px 0;
+}
+
+.menu-item {
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-left: 4px solid transparent;
+}
+
+    .menu-item:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .menu-item.active {
+        background: rgba(255, 255, 255, 0.2);
+        border-left: 4px solid #ffffff;
+    }
+
+    .menu-item i {
+        margin-right: 12px;
+        font-size: 1.1rem;
+        width: 20px;
+        text-align: center;
+    }
+
+/* Contenido principal */
+.content {
+    flex: 1;
+    overflow-y: auto;
+    background-color: #ffffff;
+    position: relative;
+}
+
+.section-container {
+    display: none;
+    padding: 20px;
+    height: 100%;
+}
+
+    .section-container.active {
+        display: block;
+    }
+
+/* Chat */
+.chat-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.chat-header {
+    padding: 15px 20px;
+    background-color: #f0f4f8;
+    border-radius: 8px 8px 0 0;
+    border-bottom: 1px solid #e0e6ed;
+}
+
+    .chat-header h2 {
+        margin: 0;
+        color: #2d5ca3;
+        font-size: 1.6rem;
+    }
+
+    .chat-header p {
+        margin: 5px 0 0;
+        color: #6c757d;
+    }
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 80px);
+    background-color: #fff;
+    border-radius: 0 0 8px 8px;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.message {
+    margin-bottom: 20px;
+    max-width: 80%;
+    display: flex;
+    flex-direction: column;
+}
+
+    .message.user {
+        align-self: flex-end;
+    }
+
+    .message.bot {
+        align-self: flex-start;
+    }
+
+.message-content {
+    padding: 12px 16px;
+    border-radius: 18px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.message.user .message-content {
+    background-color: #2d5ca3;
+    color: white;
+    border-radius: 18px 18px 0 18px;
+}
+
+.message.bot .message-content {
+    background-color: #f0f4f8;
+    color: #333;
+    border-radius: 18px 18px 18px 0;
+}
+
+.message-text {
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+    .message-text p {
+        margin: 0 0 10px;
+    }
+
+        .message-text p:last-child {
+            margin-bottom: 0;
+        }
+
+    .message-text ul {
+        margin: 8px 0;
+        padding-left: 20px;
+    }
+
+.chat-input {
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-top: 1px solid #e0e6ed;
+    display: flex;
+    align-items: center;
+}
+
+#userInput {
+    flex: 1;
+    border: 1px solid #ced4da;
+    border-radius: 20px;
+    padding: 10px 15px;
+    font-size: 0.95rem;
+    max-height: 120px;
+    resize: none;
+    outline: none;
+    transition: border 0.2s ease;
+}
+
+    #userInput:focus {
+        border-color: #2d5ca3;
+        box-shadow: 0 0 0 0.2rem rgba(45, 92, 163, 0.25);
+    }
+
+.send-button {
+    background-color: #2d5ca3;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+    .send-button:hover {
+        background-color: #1a3c70;
+        transform: scale(1.05);
+    }
+
+    .send-button:active {
+        transform: scale(0.95);
+    }
+
+/* Estadísticas */
+.stats-header {
+    margin-bottom: 20px;
+}
+
+    .stats-header h2 {
+        color: #2d5ca3;
+        font-size: 1.6rem;
+        margin: 0;
+    }
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+    gap: 20px;
+}
+
+.stats-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .stats-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+.stats-card-header {
+    padding: 15px 20px;
+    background-color: #f0f4f8;
+    border-bottom: 1px solid #e0e6ed;
+}
+
+    .stats-card-header h3 {
+        margin: 0;
+        color: #2d5ca3;
+        font-size: 1.2rem;
+    }
+
+.stats-card-body {
+    padding: 20px;
+    height: 300px;
+}
+
+/* Reservas */
+.reservas-header, .bobedas-header {
+    margin-bottom: 20px;
+}
+
+    .reservas-header h2, .bobedas-header h2 {
+        color: #2d5ca3;
+        font-size: 1.6rem;
+        margin: 0;
+    }
+
+.reservas-filters, .bobedas-filters {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    align-items: flex-end;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+}
+
+    .filter-group label {
+        font-size: 0.85rem;
+        color: #6c757d;
+        margin-bottom: 5px;
+    }
+
+    .filter-group select, .filter-group input {
+        padding: 8px 12px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        width: 180px;
+    }
+
+.btn-filtrar {
+    background-color: #2d5ca3;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    height: 38px;
+}
+
+    .btn-filtrar:hover {
+        background-color: #1a3c70;
+    }
+
+.reservas-table-container {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+.reservas-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .reservas-table th, .reservas-table td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #e0e6ed;
+    }
+
+    .reservas-table th {
+        background-color: #f0f4f8;
+        color: #2d5ca3;
+        font-weight: 600;
+    }
+
+    .reservas-table tr:hover {
+        background-color: #f8f9fa;
+    }
+
+/* Bóvedas Grid */
+.bobedas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.bobeda-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+    .bobeda-card:hover {
+        transform: translateY(-3px);
+    }
+
+    .bobeda-card.libre {
+        border-left: 4px solid #28a745;
+    }
+
+    .bobeda-card.arriendo {
+        border-left: 4px solid #ffc107;
+    }
+
+    .bobeda-card.propietario {
+        border-left: 4px solid #dc3545;
+    }
+
+.bobeda-division {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.bobeda-estado {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+    .bobeda-estado.libre {
+        background-color: rgba(40, 167, 69, 0.1);
+        color: #28a745;
+    }
+
+    .bobeda-estado.arriendo {
+        background-color: rgba(255, 193, 7, 0.1);
+        color: #d39e00;
+    }
+
+    .bobeda-estado.propietario {
+        background-color: rgba(220, 53, 69, 0.1);
+        color: #dc3545;
+    }
+
+/* Estilos para las gráficas */
+canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+/* Responsividad */
+@media (max-width: 1024px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .reportes-container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .sidebar-menu {
+        display: flex;
+        padding: 0;
+        overflow-x: auto;
+    }
+
+    .menu-item {
+        padding: 10px 15px;
+        border-left: none;
+        border-bottom: 3px solid transparent;
+    }
+
+        .menu-item.active {
+            border-left: none;
+            border-bottom: 3px solid #ffffff;
+        }
+
+    .content {
+        height: calc(100vh - 180px);
+    }
+}
+
+@media (max-width: 576px) {
+    .reservas-filters, .bobedas-filters {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .filter-group select, .filter-group input {
+        width: 100%;
+    }
+
+    .bobedas-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
+
+/* Transiciones suaves */
+.menu-item, .stats-card, .bobeda-card, .send-button, .btn-filtrar {
+    transition: all 0.3s ease;
+}

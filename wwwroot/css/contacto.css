@@ -1,0 +1,173 @@
+﻿
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f6fa;
+    color: #333;
+}
+
+.contact-container {
+    background: linear-gradient(to right, #f4f6f8, #fff);
+    border-radius: 1rem;
+    padding: 2rem;
+    font-family: 'Segoe UI', sans-serif;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+}
+}
+
+.contact-title {
+    font-size: 2.25rem;
+    font-weight: bold;
+    color: #2f3640;
+}
+
+.contact-subtitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #353b48;
+}
+
+.contact-form-card a,
+.contact-info-card b,
+.contact-map-card pam{
+    color: #333;
+    font-weight: 500;
+    font-size: 1rem;
+    background-color: #ffffff;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    transition: all 0.3s ease-in-out;
+}
+
+    .contact-form-card:hover,
+    .contact-info-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 25px rgba(0,0,0,0.1);
+    }
+
+.input-group-text {
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 10px 0 0 10px;
+}
+
+.form-control {
+    border-radius: 0 10px 10px 0;
+    border: 1px solid #ccc;
+}
+
+.modern-btn {
+    background-color: #0d6efd;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 30px;
+    border: none;
+    transition: all 0.3s ease-in-out;
+}
+
+    .modern-btn:hover {
+        background: linear-gradient(to right, #2575fc, #6a11cb);
+        transform: scale(1.05);
+    }
+
+.share-btn {
+    margin-top: 15px;
+    display: inline-block;
+}
+
+.contact-info-item {
+    display: flex;
+    align-items: center;
+}
+
+.contact-info-icon {
+    font-size: 1.5rem;
+    color: #97B5CA;
+    margin-right: 15px;
+}
+
+.contact-info-text h3 {
+    margin-bottom: 5px;
+    color: #2f3640;
+}
+
+.chatbot-trigger {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #00a8ff;
+    color: white;
+    border-radius: 50%;
+    padding: 15px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 9999;
+    box-shadow: 0 5px 15px rgba(0, 168, 255, 0.4);
+}
+
+.chat-container {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 300px;
+    max-height: 500px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 10000;
+}
+
+.chat-header {
+    background: #00a8ff;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-body {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+}
+
+.chat-input {
+    padding: 10px;
+    display: flex;
+    border-top: 1px solid #ccc;
+}
+
+    .chat-input input {
+        flex: 1;
+        border: none;
+        outline: none;
+        padding: 8px;
+        border-radius: 5px;
+    }
+
+    .chat-input button {
+        background: #00a8ff;
+        border: none;
+        color: white;
+        padding: 8px 15px;
+        margin-left: 10px;
+        border-radius: 5px;
+    }
+
+.suggestion-btn {
+    background: #f1f2f6;
+    border: none;
+    margin: 5px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+    .suggestion-btn:hover {
+        background: #dcdde1;
+    }

@@ -1,0 +1,49 @@
+﻿@model San_Agustin_Final.Models.Bobeda
+
+@{
+    ViewData["Title"] = "Detalles de Bóveda";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Enlace a Font Awesome para iconos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="stylesheet" href="~/css/admi.css" />
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <!-- Tarjeta con sombra y diseño más profundo -->
+        <div class="card shadow-lg border-0 rounded-lg mt-5">
+            <!-- Encabezado con gradiente de color -->
+            <div class="card-header bg-primary text-white text-center"
+                 style="background: linear-gradient(to right, #4a90e2, #50c878);">
+                <h1 class="my-2">Información Detallada</h1>
+            </div>
+
+            <!-- Cuerpo de la tarjeta con más espaciado -->
+            <div class="card-body p-4">
+                <dl class="row">
+                    <dt class="col-sm-4">División</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Division)</dd>
+
+                    <dt class="col-sm-4">Estado</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Estado)</dd>
+                </dl>
+
+                <div class="form-group text-center mt-4">
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning me-2">
+                        <i class="fas fa-edit me-2"></i>Editar
+                    </a>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>Volver al Listado
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

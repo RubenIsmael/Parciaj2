@@ -1,0 +1,84 @@
+﻿@model San_Agustin_Final.Models.Contrato
+
+@{
+    ViewData["Title"] = "Editar Contrato";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Enlace a Font Awesome para iconos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="stylesheet" href="~/css/admi.css" />
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <!-- Tarjeta con sombra y diseño más profundo -->
+        <div class="card shadow-lg border-0 rounded-lg mt-5">
+            <!-- Encabezado con gradiente de color -->
+            <div class="card-header bg-primary text-white text-center"
+                 style="background: linear-gradient(to right, #4a90e2, #50c878);">
+                <h1 class="my-2">Modificar Contrato</h1>
+            </div>
+
+            <!-- Cuerpo de la tarjeta con más espaciado -->
+            <div class="card-body p-4">
+                <form asp-action="Edit">
+                    <!-- Resumen de validación -->
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+
+                    <!-- Grupo de formulario para IdReserva -->
+                    <div class="form-group mb-3">
+                        <label asp-for="IdReserva" class="form-label text-primary">
+                            <i class="fas fa-calendar-check me-2"></i>Reserva
+                        </label>
+                        <select asp-for="IdReserva" class="form-control" asp-items="ViewBag.IdReserva" readonly></select>
+                        <span asp-validation-for="IdReserva" class="text-danger"></span>
+                    </div>
+
+                    <!-- Grupo de formulario para FechaInicio -->
+                    <div class="form-group mb-3">
+                        <label asp-for="FechaInicio" class="form-label text-primary">
+                            <i class="fas fa-calendar-alt me-2"></i>Fecha de Inicio
+                        </label>
+                        <input asp-for="FechaInicio" class="form-control" type="date" />
+                        <span asp-validation-for="FechaInicio" class="text-danger"></span>
+                    </div>
+
+                    <!-- Grupo de formulario para FechaFin -->
+                    <div class="form-group mb-3">
+                        <label asp-for="FechaFin" class="form-label text-primary">
+                            <i class="fas fa-calendar-alt me-2"></i>Fecha de Fin
+                        </label>
+                        <input asp-for="FechaFin" class="form-control" type="date" />
+                        <span asp-validation-for="FechaFin" class="text-danger"></span>
+                    </div>
+
+                    <!-- Grupo de formulario para Terminos -->
+                    <div class="form-group mb-3">
+                        <label asp-for="Terminos" class="form-label text-primary">
+                            <i class="fas fa-file-alt me-2"></i>Términos
+                        </label>
+                        <input asp-for="Terminos" class="form-control" placeholder="Ingrese los términos" />
+                        <span asp-validation-for="Terminos" class="text-danger"></span>
+                    </div>
+
+                    <!-- Botones con estilos más modernos -->
+                    <div class="form-group text-center mt-4">
+                        <button type="submit" class="btn btn-modern btn-crear me-2">
+                            <i class="fas fa-save me-2"></i>Guardar Cambios
+                        </button>
+                        <a asp-action="Index" class="btn btn-modern btn-detalles">
+                            <i class="fas fa-arrow-left me-2"></i>Cancelar
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

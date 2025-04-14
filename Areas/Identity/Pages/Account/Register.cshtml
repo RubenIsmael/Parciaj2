@@ -1,0 +1,188 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Registro";
+}
+
+<div class="login-container py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6 mx-auto">
+                <div class="card glass-card shadow-lg rounded-4 border-0">
+                    <div class="card-body p-4 p-md-5">
+                        <div class="text-center mb-4">
+                            <h1 class="font">Registro</h1>
+                            <p class="text-muted">Crea una nueva cuenta para continuar</p>
+                        </div>
+
+                        <form id="account" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                            <div class="form-floating mb-4 input-group-hover">
+                                <input asp-for="Input.Email" class="form-control custom-input" autocomplete="username" aria-required="true" placeholder="nombre@ejemplo.com" />
+                                <label asp-for="Input.Email">✉️ <class ="form-label"> Correo electrónico </label>
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-floating mb-4 input-group-hover">
+                                <input asp-for="Input.Password" class="form-control custom-input" autocomplete="new-password" aria-required="true" placeholder="contraseña" />
+                                <label asp-for="Input.Password">🔑 <class ="form-label"> Contraseña </label>
+                                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-floating mb-4 input-group-hover">
+                                <input asp-for="Input.ConfirmPassword" class="form-control custom-input" autocomplete="new-password" aria-required="true" placeholder="confirmar contraseña" />
+                                <label asp-for="Input.ConfirmPassword">🔐 <class ="form-label"> Confirmar Contraseña </label>
+                                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-floating mb-4 input-group-hover">
+                                <select asp-for="Input.Role" class="form-select custom-input" aria-required="true">
+                                    <option value="">Seleccione un rol</option>
+                                    <option value="Administrador">Administrador</option>
+                                    <option value="Usuario">Usuario</option>
+                                </select>
+                                <label asp-for="Input.Role">🛡️ <class ="form-label"> Rol </label>
+                                <span asp-validation-for="Input.Role" class="text-danger"></span>
+                            </div>
+
+                            <button id="registerSubmit" type="submit" class="btn btn-primary w-100 py-3 mb-4 btn-hover">
+                                <i class="bi bi-person-plus me-2"></i>Registrarse
+                            </button>
+
+                            <div class="text-center">
+                                <p>¿Ya tienes una cuenta? <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl" class="text-decoration-none fw-semibold hover-link">Inicia sesión aquí</a></p>
+                            </div>
+                        </form>
+
+                        @if ((Model.ExternalLogins?.Count ?? 0) > 0)
+                        {
+                            <div class="my-4">
+                                <div class="separator text-muted d-flex align-items-center my-3">
+                                    <span class="line flex-grow-1"></span>
+                                    <span class="mx-2">o regístrate con</span>
+                                    <span class="line flex-grow-1"></span>
+                                </div>
+
+                                <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="d-flex gap-3 flex-wrap justify-content-center">
+                                    @foreach (var provider in Model.ExternalLogins!)
+                                    {
+                                        <button type="submit" class="btn btn-outline-secondary social-btn" name="provider" value="@provider.Name" title="Registrarse con tu cuenta de @provider.DisplayName">
+                                            @provider.DisplayName
+                                        </button>
+                                    }
+                                </form>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <partial name="_ValidationScriptsPartial" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+    <style>
+        .font {
+            font-family: 'Plom';
+            src: url('/Fonts/PlomPraeng.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-size: 3rem;
+        }
+
+        #account,
+        #account label,
+        #account input,
+        #account select,
+        #account button,
+        #account p,
+        #account a {
+            font-size: 1.5rem;
+            font-family: 'Plom', sans-serif !important;
+        }
+
+        @@media (max-width: 768px) {
+            #account,
+            #account label,
+            #account input,
+            #account select,
+            #account button,
+            #account p,
+            #account a {
+                font-size: 1.2rem;
+            }
+
+            .font {
+                font-size: 2.5rem;
+            }
+        }
+
+        .form-control,
+        .form-select,
+        .btn-primary {
+            font-size: 1.2rem;
+        }
+
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 100%;
+            padding: 2rem;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            transition: all 0.4s ease;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+            .glass-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 30px rgba(31, 38, 135, 0.4);
+            }
+
+        .input-group-hover input:hover,
+        .input-group-hover select:hover {
+            border-color: #007bff;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+        }
+
+        .btn-hover:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .hover-link:hover {
+            text-decoration: underline;
+            color: #0056b3;
+        }
+
+        .separator .line {
+            height: 1px;
+            background-color: #ccc;
+        }
+
+        .social-btn {
+            min-width: 150px;
+        }
+    </style>
+}

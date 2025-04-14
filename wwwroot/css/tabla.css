@@ -1,0 +1,94 @@
+/* ===== Contenedor de la Tabla ===== */
+.table-container {
+    background-color: white !important; /* Asegurar fondo blanco */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 20px; /* Espaciado alrededor de la tabla */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    width: 100%; /* Ocupar todo el ancho disponible */
+    overflow-x: auto; /* Scroll horizontal si es necesario */
+}
+
+/* ===== Estilos de la Tabla ===== */
+.table-modern {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 22px; /* Tamaño de fuente general */
+}
+
+    /* ===== Encabezados ===== */
+    .table-modern th {
+        font-size: 25px;
+        font-weight: bold;
+        padding: 12px;
+        text-align: left;
+        background-color: #6a5acd; /* Lila oscuro */
+        color: white;
+        border-bottom: 3px solid #4b0082;
+    }
+
+    /* ===== Filas Alternadas ===== */
+    .table-modern tbody tr {
+        background-color: #f9f9f9;
+    }
+
+        .table-modern tbody tr:nth-child(even) {
+            background-color: #E2EEF0;
+        }
+
+        /* ===== Hover en Filas ===== */
+        .table-modern tbody tr:hover {
+            background-color: rgba(106, 90, 205, 0.2);
+        }
+
+    /* ===== Estilos para Botones ===== */
+    .table-modern .btn {
+        font-size: 18px; /* Tamaño más grande */
+        padding: 12px 16px; /* Botones más cómodos */
+        text-transform: uppercase; /* Letras en mayúsculas */
+        font-weight: #000000;
+    }
+
+        /* Iconos en los botones */
+        .table-modern .btn i {
+            margin-right: 6px;
+        }
+/* Botón de eliminar (rojo con texto negro) */
+.btn-danger {
+    color: black !important; /* Forzar texto negro */
+    background-color: #EA3242; /* Mantener el fondo rojo */
+    /* border-color: red !important;  Mantener el borde rojo */
+}
+
+    /* Cambiar color del texto al pasar el mouse */
+    .btn-danger:hover {
+        color: white !important; /* Blanco al hacer hover */
+        background-color: #C22F3D; /* Rojo oscuro al hacer hover */
+    }
+
+
+/* Botón de Editar (amarillo con texto negro) */
+.btn-warning {
+    color: black !important; /* Texto negro */
+    background-color: #FBA114; /* Fondo amarillo */
+    /* border-color: yellow !important;  Borde amarillo */
+}
+
+    /* Cambiar color del texto al pasar el mouse */
+    .btn-warning:hover {
+        color: white !important; /* Texto blanco en hover */
+        background-color: #E97A07; /* Naranja en hover */
+    }
+
+/* Botón de Detalles (azul con texto negro) */
+.btn-info {
+    color: black !important; /* Texto negro */
+    background-color: lightblue !important; /* Fondo azul claro */
+    border-color: lightblue !important; /* Borde azul claro */
+}
+
+    /* Cambiar color del texto y oscurecer el fondo al pasar el mouse */
+    .btn-info:hover {
+        color: white !important; /* Texto blanco en hover */
+        background-color: darkblue !important; /* Azul oscuro en hover */
+    }

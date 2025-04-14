@@ -1,0 +1,161 @@
+﻿@model San_Agustin_Final.Models.Reserva
+
+@{
+    ViewData["Title"] = "Crear Reserva";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Enlace a Font Awesome para iconos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="stylesheet" href="~/css/admi.css" />
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <!-- Tarjeta con sombra y diseño más profundo -->
+        <div class="card shadow-lg border-0 rounded-lg mt-5">
+            <!-- Encabezado con gradiente de color -->
+            <div class="card-header bg-primary text-white text-center"
+                 style="background: linear-gradient(to right, #4a90e2, #50c878);">
+                <h1 class="my-2">Registrar Nueva Reserva</h1>
+            </div>
+
+            <!-- Cuerpo de la tarjeta con más espaciado -->
+            <div class="card-body p-4">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    @Html.AntiForgeryToken()
+                    <!-- Grupo de formulario para Cedula -->
+                    <div class="form-group mb-3">
+                        <label asp-for="IdCliente" class="form-label text-primary">
+                            <i class="fas fa-id-card me-2"></i>Cédula
+                        </label>
+                        <select asp-for="IdCliente" class="form-control" asp-items="ViewBag.IdCliente" id="CedulaSelect">
+                            <option value="">-- Seleccione una opción --</option>
+                        </select>
+                        <span asp-validation-for="IdCliente" class="text-danger"></span>
+                    </div>
+
+                    <!-- Grupo de formulario para Nombre -->
+                    <div class="form-group mb-3">
+                        <label asp-for="Nombre" class="form-label text-primary">
+                            <i class="fas fa-user me-2"></i>Nombre
+                        </label>
+                        <input asp-for="Nombre" class="form-control" id="Nombre" readonly />
+                        <input type="hidden" asp-for="Nombre" />
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+
+                    <!-- Grupo de formulario para Apellido -->
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Apellido" class="form-label text-primary">
+                            <i class="fas fa-user me-2"></i>Apellido
+                        </label>
+                        <input asp-for="Apellido" class="form-control" id="Apellido" readonly />
+                        <input type="hidden" asp-for="Apellido" />
+                        <span asp-validation-for="Apellido" class="text-danger"></span>
+                    </div>
+
+
+                    <!-- Combo para seleccionar la bóveda (sector) -->
+                    <div class="form-group mb-3">
+                        <label asp-for="IdPrecio" class="form-label text-primary">
+                            <i class="fas fa-building me-2"></i>Bóveda
+                        </label>
+                        <select asp-for="IdPrecio" class="form-control" asp-items="ViewBag.IdPrecio" id="PrecioSelect">
+                            <option value="">-- Seleccione una opción --</option>
+                        </select>
+                        <span asp-validation-for="IdPrecio" class="text-danger"></span>
+                    </div>
+
+                    <!-- Muestra del precio correspondiente -->
+                    <div class="form-group mb-3">
+                        <label class="form-label text-primary">
+                            <i class="fas fa-tag me-2"></i>Precio
+                        </label>
+                        <input type="text" id="PrecioValor" class="form-control" readonly />
+                        <!-- ELIMINAR esta línea que está causando problemas -->
+                        <!-- <input type="hidden" asp-for="IdPrecio" /> -->
+                    </div>
+
+                    <!-- Grupo de formulario para EstadoPago -->
+                    <div class="form-group mb-3">
+                        <label asp-for="EstadoPago" class="form-label text-primary">
+                            <i class="fas fa-check-circle me-2"></i>Estado de Pago
+                        </label>
+                        <select asp-for="EstadoPago" class="form-control">
+                            <option value="">Seleccione un estado</option>
+                            <option value="pagado">Pagado</option>
+                            <option value="pendiente">Pendiente</option>
+                        </select>
+                        <span asp-validation-for="EstadoPago" class="text-danger"></span>
+                    </div>
+
+                    <!-- Grupo de formulario para FechaReserva -->
+                    <div class="form-group mb-3">
+                        <label asp-for="FechaReserva" class="form-label text-primary">
+                            <i class="fas fa-calendar-alt me-2"></i>Fecha de Reserva
+                        </label>
+                        <input asp-for="FechaReserva" class="form-control" type="date" />
+                        <span asp-validation-for="FechaReserva" class="text-danger"></span>
+                    </div>
+
+                    <!-- Botones con estilos más modernos -->
+                    <div class="form-group text-center mt-4">
+                        <button type="submit" id="btnGuardarDirecto" class="btn btn-modern btn-crear me-2">
+                            <i class="fas fa-save me-2"></i>Crear
+                        </button>
+                        <a asp-action="Index" class="btn btn-modern btn-detalles">
+                            <i class="fas fa-arrow-left me-2"></i>Volver a la lista
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Verificar que jQuery está cargado correctamente
+        console.log("jQuery versión:", $.fn.jquery);
+    </script>
+
+    <!-- Asegúrate de que la ruta al archivo JS es correcta -->
+    <script src="~/js/nombre.js"></script>
+    <!--<script src="~/js/precios.js"></script>-->
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/js/reservaDirecta.js"></script>
+
+    <script>
+        // Código para verificar que todo se cargó correctamente
+        $(document).ready(function() {
+            console.log("Documento listo en script directo");
+        });
+              // Corregir script de precio
+        document.addEventListener("DOMContentLoaded", function () {
+            const select = document.getElementById("PrecioSelect");
+            const precioInput = document.getElementById("PrecioValor");
+
+            select.addEventListener("change", function () {
+                const id = this.value;
+                if (id) {
+                    fetch(`/Reservas/GetPrecio/${id}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            precioInput.value = data.precioValor;
+                            // Ya no es necesario establecer un campo oculto
+                            // El select ya tiene el asp-for="IdPrecio" que se enviará al servidor
+                        })
+                        .catch(error => {
+                            console.error("Error al obtener el precio:", error);
+                        });
+                } else {
+                    precioInput.value = "";
+                }
+            });
+        });
+    </script>
+} 
